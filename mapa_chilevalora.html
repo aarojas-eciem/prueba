@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_67ac8ce04e5a23f0afa06b29769c7ed7 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; 
+            top: 15px; right: 15px; width: 390px; 
+            background-color: rgba(255, 255, 255, 0.98); 
+            border: 3px solid #082959; z-index:9999; 
+            padding: 16px; border-radius: 10px; 
+            box-shadow: 0 6px 16px rgba(8, 41, 89, 0.2);
+            font-family: 'Segoe UI', Arial, sans-serif;">
+    
+    <h3 style="margin: 0 0 10px 0; color: #082959; font-size: 13.5px; font-weight: 700; 
+               border-bottom: 2px solid #082959; padding-bottom: 7px;">
+        Ámbitos de Certificación
+    </h3>
+    
+    <div style="margin-bottom: 13px;">
+        <div style="margin: 6px 0; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 19px; height: 19px; background-color: #082959; 
+                         border-radius: 50%; margin-right: 9px; border: 2.5px solid white; 
+                         box-shadow: 0 0 5px rgba(0,0,0,0.3); flex-shrink: 0;"></span>
+            <span style="font-size: 11px; line-height: 1.2; color: #2C3E50;">
+                <b>Ámbito 4:</b> Cuidado personal directo 
+                <span style="color: #7F8C8D; font-size: 9.5px;">(14)</span>
+            </span>
+        </div>
+        
+        <div style="margin: 6px 0; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 19px; height: 19px; background-color: #7DC6E2; 
+                         border-radius: 50%; margin-right: 9px; border: 2.5px solid white; 
+                         box-shadow: 0 0 5px rgba(0,0,0,0.3); flex-shrink: 0;"></span>
+            <span style="font-size: 11px; line-height: 1.2; color: #2C3E50;">
+                <b>Ámbito 3:</b> Asistencia y supervisión niños
+                <span style="color: #7F8C8D; font-size: 9.5px;">(4)</span>
+            </span>
+        </div>
+        
+        <div style="margin: 6px 0; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 19px; height: 19px; background-color: #9B7EDE; 
+                         border-radius: 50%; margin-right: 9px; border: 2.5px solid white; 
+                         box-shadow: 0 0 5px rgba(0,0,0,0.3); flex-shrink: 0;"></span>
+            <span style="font-size: 11px; line-height: 1.2; color: #2C3E50;">
+                <b>Ámbito 6:</b> Apoyo doméstico
+                <span style="color: #7F8C8D; font-size: 9.5px;">(2)</span>
+            </span>
+        </div>
+    </div>
+    
+    <!-- ESCALA BASADA EN PERFILES POR CENTRO -->
+    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+                padding: 9px; border-radius: 6px; margin-bottom: 13px; 
+                border-left: 3px solid #082959;">
+        <p style="margin: 0 0 5px 0; font-size: 10px; font-weight: 600; color: #082959;">
+            Diversidad de oferta por centro
+        </p>
+        <p style="margin: 0 0 7px 0; font-size: 9px; line-height: 1.3; color: #495057;">
+            El tamaño representa la cantidad de perfiles ocupacionales que certifica cada centro
+        </p>
+        <div style="display: flex; align-items: center; justify-content: space-around;">
+            <div style="text-align: center;">
+                <div style="width: 12px; height: 12px; background-color: #6c757d; border-radius: 50%; 
+                           margin: 0 auto 2px; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.2);"></div>
+                <span style="font-size: 8.5px; color: #666;">1</span>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 18px; height: 18px; background-color: #6c757d; border-radius: 50%; 
+                           margin: 0 auto 2px; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.2);"></div>
+                <span style="font-size: 8.5px; color: #666;">2</span>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 24px; height: 24px; background-color: #6c757d; border-radius: 50%; 
+                           margin: 0 auto 2px; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.2);"></div>
+                <span style="font-size: 8.5px; color: #666;">3</span>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 30px; height: 30px; background-color: #6c757d; border-radius: 50%; 
+                           margin: 0 auto 2px; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.2);"></div>
+                <span style="font-size: 8.5px; color: #666;">4</span>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 36px; height: 36px; background-color: #6c757d; border-radius: 50%; 
+                           margin: 0 auto 2px; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.2);"></div>
+                <span style="font-size: 8.5px; color: #666;">5+</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- INDICADORES DE COBERTURA -->
+    <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; margin-bottom: 11px;">
+        <tr style="background-color: #082959; color: white;">
+            <th colspan="2" style="padding: 5px 7px; text-align: left; font-weight: 600; border-radius: 4px 4px 0 0;">
+                Indicadores de Cobertura
+            </th>
+        </tr>
+        <tr style="background-color: #f8f9fa;">
+            <td style="padding: 4px 7px; font-weight: 500;">Perfiles certificables</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 700; color: #082959;">5</td>
+        </tr>
+        <tr>
+            <td style="padding: 4px 7px; font-weight: 500;">Centros diferentes</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 700; color: #082959;">12</td>
+        </tr>
+        <tr style="background-color: #f8f9fa;">
+            <td style="padding: 4px 7px; font-weight: 500;">Regiones</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 700; color: #082959;">5</td>
+        </tr>
+        <tr>
+            <td style="padding: 4px 7px; font-weight: 500;">Comunas</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 700; color: #082959;">10</td>
+        </tr>
+    </table>
+    
+    <!-- DISTRIBUCIÓN REGIONAL -->
+    <table style="width: 100%; border-collapse: collapse; font-size: 10.5px;">
+        <tr style="background-color: #082959; color: white;">
+            <th style="padding: 5px 7px; text-align: left; font-weight: 600; border-radius: 4px 0 0 0;">Región</th>
+            <th style="padding: 5px 7px; text-align: center; font-weight: 600;">Centros</th>
+            <th style="padding: 5px 7px; text-align: center; font-weight: 600; border-radius: 0 4px 0 0;">%</th>
+        </tr>
+
+        <tr style="background-color: #f8f9fa;">
+            <td style="padding: 4px 7px; font-size: 10px;">R.M.</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 600; color: #082959; font-size: 10px;">5</td>
+            <td style="padding: 4px 7px; text-align: center; font-size: 10px;">41.7%</td>
+        </tr>
+    
+        <tr style="background-color: white;">
+            <td style="padding: 4px 7px; font-size: 10px;">Valparaíso</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 600; color: #082959; font-size: 10px;">3</td>
+            <td style="padding: 4px 7px; text-align: center; font-size: 10px;">25.0%</td>
+        </tr>
+    
+        <tr style="background-color: #f8f9fa;">
+            <td style="padding: 4px 7px; font-size: 10px;">Araucanía</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 600; color: #082959; font-size: 10px;">2</td>
+            <td style="padding: 4px 7px; text-align: center; font-size: 10px;">16.7%</td>
+        </tr>
+    
+        <tr style="background-color: white;">
+            <td style="padding: 4px 7px; font-size: 10px;">Antofagasta</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 600; color: #082959; font-size: 10px;">1</td>
+            <td style="padding: 4px 7px; text-align: center; font-size: 10px;">8.3%</td>
+        </tr>
+    
+        <tr style="background-color: #f8f9fa;">
+            <td style="padding: 4px 7px; font-size: 10px;">Libertador Gral. Bernardo O’Higgins</td>
+            <td style="padding: 4px 7px; text-align: center; font-weight: 600; color: #082959; font-size: 10px;">1</td>
+            <td style="padding: 4px 7px; text-align: center; font-size: 10px;">8.3%</td>
+        </tr>
+    
+    </table>
+</div>
+    
+            <div class="folium-map" id="map_67ac8ce04e5a23f0afa06b29769c7ed7" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_67ac8ce04e5a23f0afa06b29769c7ed7 = L.map(
+                "map_67ac8ce04e5a23f0afa06b29769c7ed7",
+                {
+                    center: [-35.5, -71.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "scrollWheelZoom": true,
+  "dragging": true,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+
+            
+
+        
+    
+            var tile_layer_cef102ac9f2ecfb93f0a73bd51c8bd3e = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_cef102ac9f2ecfb93f0a73bd51c8bd3e.addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+            var circle_marker_f4fbbbb0c57ea72216dee3be0cb1920a = L.circleMarker(
+                [-38.739821, -72.592787],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 24, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_d66aa73487d04bbd17a6fee357493b27 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_fde0233b77b2faff718146682bb341cf = $(`<div id="html_fde0233b77b2faff718146682bb341cf" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             ECERLAB Ltda.         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">76.177.214-7</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Temuco, Araucanía</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">5</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Trabajadores de los cuidados personales a domicilio<br>• Trabajadores de los cuidados personales a domicilio.<br>• Otros trabajadores de los cuidados personales en institucion...<br>• Amas de llaves, mayordomos domésticos y dueños/administrador...<br>• Asistentes de aulas e inspectores de patio             </div>         </div>     </div>     </div>`)[0];
+                popup_d66aa73487d04bbd17a6fee357493b27.setContent(html_fde0233b77b2faff718146682bb341cf);
+            
+        
+
+        circle_marker_f4fbbbb0c57ea72216dee3be0cb1920a.bindPopup(popup_d66aa73487d04bbd17a6fee357493b27)
+        ;
+
+        
+    
+    
+            circle_marker_f4fbbbb0c57ea72216dee3be0cb1920a.bindTooltip(
+                `<div>
+                     <b>ECERLAB Ltda.</b><br>Temuco, Araucanía<br><b>5 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f2dda737c3d734f102d8391424a6a2c2 = L.circleMarker(
+                [-32.83369, -70.59827],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_1d79f2ce8c332c99d81abe11e91a02b5 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_2f4186cd641f54b4030a420c888b3816 = $(`<div id="html_2f4186cd641f54b4030a420c888b3816" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             MG CERTIFICA LTDA.         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">76.237.325-4</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Los Andes, Valparaíso</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">3</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Trabajadores de los cuidados personales a domicilio<br>• Trabajadores de los cuidados personales a domicilio.<br>• Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_1d79f2ce8c332c99d81abe11e91a02b5.setContent(html_2f4186cd641f54b4030a420c888b3816);
+            
+        
+
+        circle_marker_f2dda737c3d734f102d8391424a6a2c2.bindPopup(popup_1d79f2ce8c332c99d81abe11e91a02b5)
+        ;
+
+        
+    
+    
+            circle_marker_f2dda737c3d734f102d8391424a6a2c2.bindTooltip(
+                `<div>
+                     <b>MG CERTIFICA LTDA.</b><br>Los Andes, Valparaíso<br><b>3 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94870de816f083563d406eba22f90577 = L.circleMarker(
+                [-33.480392, -70.602565],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_1b203ff1379bdbb6576202aeee11b2c7 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_ee8943d5d013db578e4da4e1b8d3ae13 = $(`<div id="html_ee8943d5d013db578e4da4e1b8d3ae13" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             BUREAU VERITAS CERTIFICATION CHILE S.A.         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">99526160-K</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Macul, Metropolitana</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_1b203ff1379bdbb6576202aeee11b2c7.setContent(html_ee8943d5d013db578e4da4e1b8d3ae13);
+            
+        
+
+        circle_marker_94870de816f083563d406eba22f90577.bindPopup(popup_1b203ff1379bdbb6576202aeee11b2c7)
+        ;
+
+        
+    
+    
+            circle_marker_94870de816f083563d406eba22f90577.bindTooltip(
+                `<div>
+                     <b>BUREAU VERITAS CERTIFICATION CHILE S.A.</b><br>Macul, Metropolitana<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_925fd733a3b50f3f4c1dc430951db7d1 = L.circleMarker(
+                [-33.438403, -70.571734],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_25917607e76b13ea78693b81f50d68e2 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_a59e623716b06e51063121a595521dd5 = $(`<div id="html_a59e623716b06e51063121a595521dd5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             CAPITOL GROUP LTDA.         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">77048304-2</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">La Reina, Metropolitana</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_25917607e76b13ea78693b81f50d68e2.setContent(html_a59e623716b06e51063121a595521dd5);
+            
+        
+
+        circle_marker_925fd733a3b50f3f4c1dc430951db7d1.bindPopup(popup_25917607e76b13ea78693b81f50d68e2)
+        ;
+
+        
+    
+    
+            circle_marker_925fd733a3b50f3f4c1dc430951db7d1.bindTooltip(
+                `<div>
+                     <b>CAPITOL GROUP LTDA.</b><br>La Reina, Metropolitana<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_af5417c37dc1be19934a4ba32dc59b71 = L.circleMarker(
+                [-34.169485, -70.742123],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_2cc3a3c538a9e4302d04de4f7779b319 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_315390ff5fb063b853d3a3067f44fc11 = $(`<div id="html_315390ff5fb063b853d3a3067f44fc11" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             CENTRO JES & DOR LTDA         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">76876748-3</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Rancagua, Libertador Gral. Bernardo O’Higgins</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_2cc3a3c538a9e4302d04de4f7779b319.setContent(html_315390ff5fb063b853d3a3067f44fc11);
+            
+        
+
+        circle_marker_af5417c37dc1be19934a4ba32dc59b71.bindPopup(popup_2cc3a3c538a9e4302d04de4f7779b319)
+        ;
+
+        
+    
+    
+            circle_marker_af5417c37dc1be19934a4ba32dc59b71.bindTooltip(
+                `<div>
+                     <b>CENTRO JES & DOR LTDA</b><br>Rancagua, Libertador Gral. Bernardo O’Higgins<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6a4f8e422726d1db49102952ddca3e8c = L.circleMarker(
+                [-33.442275, -70.628056],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_531fc7a93620e87b390d5653c5bfc63a = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_03c1e70c9e47ae07d2f6b13e1750e7e3 = $(`<div id="html_03c1e70c9e47ae07d2f6b13e1750e7e3" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             CENTRO CERTIFICA T         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">76481775-3</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Providencia, Metropolitana</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_531fc7a93620e87b390d5653c5bfc63a.setContent(html_03c1e70c9e47ae07d2f6b13e1750e7e3);
+            
+        
+
+        circle_marker_6a4f8e422726d1db49102952ddca3e8c.bindPopup(popup_531fc7a93620e87b390d5653c5bfc63a)
+        ;
+
+        
+    
+    
+            circle_marker_6a4f8e422726d1db49102952ddca3e8c.bindTooltip(
+                `<div>
+                     <b>CENTRO CERTIFICA T</b><br>Providencia, Metropolitana<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fdcdf2b477329d67a19d1d75217310a2 = L.circleMarker(
+                [-32.830262, -70.596332],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_fedec479d85558ee885a62105e2fdb7e = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_89251441795b78e57d5a7f4611a0e1be = $(`<div id="html_89251441795b78e57d5a7f4611a0e1be" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             OPERAMAQ EMPRESA SpA         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">77741739-8</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Los Andes, Valparaíso</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_fedec479d85558ee885a62105e2fdb7e.setContent(html_89251441795b78e57d5a7f4611a0e1be);
+            
+        
+
+        circle_marker_fdcdf2b477329d67a19d1d75217310a2.bindPopup(popup_fedec479d85558ee885a62105e2fdb7e)
+        ;
+
+        
+    
+    
+            circle_marker_fdcdf2b477329d67a19d1d75217310a2.bindTooltip(
+                `<div>
+                     <b>OPERAMAQ EMPRESA SpA</b><br>Los Andes, Valparaíso<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f850b81fab963afb0b9f5ac7e82abbfa = L.circleMarker(
+                [-33.44479, -70.655605],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_52b79b9d6bccf097c22cd7de98879bd1 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_895619d5a7a748a7b411e9f04718ee4f = $(`<div id="html_895619d5a7a748a7b411e9f04718ee4f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             QUALIFICA CHILE SPA         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">78139236-7</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">	Estación Central, Metropolitana</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_52b79b9d6bccf097c22cd7de98879bd1.setContent(html_895619d5a7a748a7b411e9f04718ee4f);
+            
+        
+
+        circle_marker_f850b81fab963afb0b9f5ac7e82abbfa.bindPopup(popup_52b79b9d6bccf097c22cd7de98879bd1)
+        ;
+
+        
+    
+    
+            circle_marker_f850b81fab963afb0b9f5ac7e82abbfa.bindTooltip(
+                `<div>
+                     <b>QUALIFICA CHILE SPA</b><br>	Estación Central, Metropolitana<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9ad0680f4196762353fcd9bc95e67ae8 = L.circleMarker(
+                [-38.737766, -72.60161],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_36bd19b401f7f970726ce7317b550c68 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_7e4b236542b30c9d883d08c3fcb8de0d = $(`<div id="html_7e4b236542b30c9d883d08c3fcb8de0d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             UNIVERSIDAD CATÓLICA DE TEMUCO         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">71918700-5</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Temuco, Araucanía</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">2</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...<br>• Asistentes de aulas e inspectores de patio             </div>         </div>     </div>     </div>`)[0];
+                popup_36bd19b401f7f970726ce7317b550c68.setContent(html_7e4b236542b30c9d883d08c3fcb8de0d);
+            
+        
+
+        circle_marker_9ad0680f4196762353fcd9bc95e67ae8.bindPopup(popup_36bd19b401f7f970726ce7317b550c68)
+        ;
+
+        
+    
+    
+            circle_marker_9ad0680f4196762353fcd9bc95e67ae8.bindTooltip(
+                `<div>
+                     <b>UNIVERSIDAD CATÓLICA DE TEMUCO</b><br>Temuco, Araucanía<br><b>2 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_adf04cc4759bc88061bd0035fab05d86 = L.circleMarker(
+                [-33.034861111111, -71.595222222222],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#082959", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_4e4204e617092d4aa481f6869b679245 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_9bebb41085dd974f9ebe50aab01547d6 = $(`<div id="html_9bebb41085dd974f9ebe50aab01547d6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #082959; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #082959;">             UNIVERSIDAD TÉCNICA FEDERICO SANTA MARÍA         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">81668700-4</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Valparaíso, Valparaíso</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 4: Cuidado personal directo de personas con dependencia</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #082959; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Otros trabajadores de los cuidados personales en institucion...             </div>         </div>     </div>     </div>`)[0];
+                popup_4e4204e617092d4aa481f6869b679245.setContent(html_9bebb41085dd974f9ebe50aab01547d6);
+            
+        
+
+        circle_marker_adf04cc4759bc88061bd0035fab05d86.bindPopup(popup_4e4204e617092d4aa481f6869b679245)
+        ;
+
+        
+    
+    
+            circle_marker_adf04cc4759bc88061bd0035fab05d86.bindTooltip(
+                `<div>
+                     <b>UNIVERSIDAD TÉCNICA FEDERICO SANTA MARÍA</b><br>Valparaíso, Valparaíso<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e1113f8c867e7a9d1c76ab9c1fd797ba = L.circleMarker(
+                [-33.439611, -70.651626],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9B7EDE", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_fb9cd6c1bba8f7d283dcef4a387a8f7c = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_b06f56a0675ca9b193f62377749dcd84 = $(`<div id="html_b06f56a0675ca9b193f62377749dcd84" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #9B7EDE; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #9B7EDE;">             CENTRO CNC SPA         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">76233285-K</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Santiago, Metropolitana</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 6: Apoyo doméstico y acompañamiento</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #9B7EDE; font-weight: bold; font-size: 14px;">2</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Amas de llaves, mayordomos domésticos y dueños/administrador...<br>• Asistentes de aulas e inspectores de patio             </div>         </div>     </div>     </div>`)[0];
+                popup_fb9cd6c1bba8f7d283dcef4a387a8f7c.setContent(html_b06f56a0675ca9b193f62377749dcd84);
+            
+        
+
+        circle_marker_e1113f8c867e7a9d1c76ab9c1fd797ba.bindPopup(popup_fb9cd6c1bba8f7d283dcef4a387a8f7c)
+        ;
+
+        
+    
+    
+            circle_marker_e1113f8c867e7a9d1c76ab9c1fd797ba.bindTooltip(
+                `<div>
+                     <b>CENTRO CNC SPA</b><br>Santiago, Metropolitana<br><b>2 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3ca3d82d0edec28ad851bddfa0fec573 = L.circleMarker(
+                [-23.6425, -70.3953],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7DC6E2", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_67ac8ce04e5a23f0afa06b29769c7ed7);
+        
+    
+        var popup_798207ea82688c07a78cf91232f183e8 = L.popup({
+  "maxWidth": 400,
+});
+
+        
+            
+                var html_e73351a0c56f0002008ece340f0a2b93 = $(`<div id="html_e73351a0c56f0002008ece340f0a2b93" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 360px; font-size: 13px;">         <h4 style="color: #7DC6E2; margin: 0 0 10px 0; padding-bottom: 8px; border-bottom: 2px solid #7DC6E2;">             FULCRO SpA         </h4>         <table style="width: 100%; border-collapse: collapse;">             <tr>                 <td style="padding: 4px 0; font-weight: bold; width: 35%;">RUT:</td>                 <td style="padding: 4px 0;">76149029-K</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold;">Ubicación:</td>                 <td style="padding: 4px 0;">Antofagasta, Antofagasta</td>             </tr>             <tr>                 <td style="padding: 4px 0; font-weight: bold;">Ámbito principal:</td>                 <td style="padding: 4px 0;">Ámbito 3: Asistencia y supervisión en el cuidado de niños</td>             </tr>             <tr style="background-color: #f8f9fa;">                 <td style="padding: 4px 0; font-weight: bold; vertical-align: top;">Perfiles certificados:</td>                 <td style="padding: 4px 0; color: #7DC6E2; font-weight: bold; font-size: 14px;">1</td>             </tr>         </table>         <div style="margin-top: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; max-height: 150px; overflow-y: auto;">             <p style="margin: 0 0 5px 0; font-size: 11px; font-weight: bold; color: #555;">Detalle de perfiles:</p>             <div style="font-size: 10px; line-height: 1.4; color: #666;">                 • Asistentes de aulas e inspectores de patio             </div>         </div>     </div>     </div>`)[0];
+                popup_798207ea82688c07a78cf91232f183e8.setContent(html_e73351a0c56f0002008ece340f0a2b93);
+            
+        
+
+        circle_marker_3ca3d82d0edec28ad851bddfa0fec573.bindPopup(popup_798207ea82688c07a78cf91232f183e8)
+        ;
+
+        
+    
+    
+            circle_marker_3ca3d82d0edec28ad851bddfa0fec573.bindTooltip(
+                `<div>
+                     <b>FULCRO SpA</b><br>Antofagasta, Antofagasta<br><b>1 perfil(es) certificado(s)</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
